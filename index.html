@@ -30,7 +30,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      /* Generates a virtual canvas wide enough to fit columns A to AR */
+      /* Generates a virtual canvas wide enough to cover columns A through AR */
       width: 3200px;
       height: 1600px;
 
@@ -42,14 +42,14 @@
 </head>
 <body>
   <div class="wrapper">
-    <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRiYd1k_b0xS3zBIPPeoVRdiVoi4gxS3IwWsua3M39ofI_ocmOlIUtFbNVf4aNNe9EQxv3U5571Y4Uc/pubhtml?gid=713619322&single=true"></iframe>
+    <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRiYd1k_b0xS3zBIPPeoVRdiVoi4gxS3IwWsua3M39ofI_ocmOlIUtFbNVf4aNNe9EQxv3U5571Y4Uc/pubhtml?gid=713619322&single=true&chrome=false"></iframe>
   </div>
 
   <script>
-    const baseUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRiYd1k_b0xS3zBIPPeoVRdiVoi4gxS3IwWsua3M39ofI_ocmOlIUtFbNVf4aNNe9EQxv3U5571Y4Uc/pubhtml?gid=713619322&single=true";
+    const baseUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRiYd1k_b0xS3zBIPPeoVRdiVoi4gxS3IwWsua3M39ofI_ocmOlIUtFbNVf4aNNe9EQxv3U5571Y4Uc/pubhtml?gid=713619322&single=true&chrome=false";
     const iframe = document.getElementById("sheetFrame");
 
-    // Force-refreshes the iframe every 60 seconds with a unique timestamp to break Google's cache
+    // Force-refreshes the iframe every 60 seconds with a unique timestamp to break Google's CDN cache
     setInterval(() => {
       const cacheBuster = "&_cb=" + new Date().getTime();
       iframe.src = baseUrl + cacheBuster;
