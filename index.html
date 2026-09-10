@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>TV Attendance Dashboard</title>
-  <!-- Automatically reloads every 60 seconds to pull live checkbox edits -->
-  <meta http-equiv="refresh" content="60">
   <style>
     * {
       margin: 0;
@@ -13,35 +11,49 @@
       overflow: hidden;
     }
 
-    body, html {
+    html, body {
       width: 100vw;
       height: 100vh;
       background-color: #ffffff;
+      overflow: hidden;
     }
 
     .wrapper {
       width: 100vw;
       height: 100vh;
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
     }
 
     iframe {
       border: none;
-      /* Generates a virtual canvas wide enough to render Columns A to AR without cutting off */
-      width: 2500px;
-      height: 1400px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* Generates a virtual canvas wide enough to fit columns A to AR */
+      width: 3200px;
+      height: 1600px;
 
-      /* Automatically scales down the 2500px canvas to fit 1920x1080 Full HD (1920 / 2500 = ~0.768) */
-      transform: scale(0.768);
+      /* Automatically scales the width down to match the exact TV screen width */
+      transform: scale(calc(100vw / 3200));
       transform-origin: top left;
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRiYd1k_b0xS3zBIPPeoVRdiVoi4gxS3IwWsua3M39ofI_ocmOlIUtFbNVf4aNNe9EQxv3U5571Y4Uc/pubhtml?gid=713619322&single=true&chrome=false"></iframe>
+    <iframe id="sheetFrame" src="PASTE_YOUR_PUBLISHED_URL_HERE&chrome=false"></iframe>
   </div>
+
+  <script>
+    const baseUrl = "PASTE_YOUR_PUBLISHED_URL_HERE&chrome=false";
+    const iframe = document.getElementById("sheetFrame");
+
+    // Force-refreshes the iframe every 60 seconds with a unique timestamp to break Google's cache
+    setInterval(() => {
+      const cacheBuster = "&_cb=" + new Date().getTime();
+      iframe.src = baseUrl + cacheBuster;
+    }, 60000);
+  </script>
 </body>
 </html>
