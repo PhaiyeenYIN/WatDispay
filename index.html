@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>TV Attendance Dashboard</title>
+  <!-- Prevents browser-level caching -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <style>
     * {
       margin: 0;
@@ -15,7 +19,6 @@
       width: 100vw;
       height: 100vh;
       background-color: #ffffff;
-      overflow: hidden;
     }
 
     .wrapper {
@@ -30,12 +33,12 @@
       position: absolute;
       top: 0;
       left: 0;
-      /* Generates a virtual canvas wide enough to cover columns A through AR */
-      width: 3200px;
-      height: 1600px;
+      /* Extended canvas to fit all columns through AR */
+      width: 3800px;
+      height: 2000px;
 
-      /* Automatically scales the width down to match the exact TV screen width */
-      transform: scale(calc(100vw / 3200));
+      /* Automatically locks the 3800px table to fill 100% of your browser width */
+      transform: scale(calc(100vw / 3800));
       transform-origin: top left;
     }
   </style>
@@ -47,13 +50,12 @@
 
   <script>
     const baseUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRiYd1k_b0xS3zBIPPeoVRdiVoi4gxS3IwWsua3M39ofI_ocmOlIUtFbNVf4aNNe9EQxv3U5571Y4Uc/pubhtml?gid=713619322&single=true&chrome=false";
-    const iframe = document.getElementById("sheetFrame");
+    const frame = document.getElementById("sheetFrame");
 
-    // Force-refreshes the iframe every 60 seconds with a unique timestamp to break Google's CDN cache
+    // Force real-time reload every 30 seconds by busting the CDN cache
     setInterval(() => {
-      const cacheBuster = "&_cb=" + new Date().getTime();
-      iframe.src = baseUrl + cacheBuster;
-    }, 60000);
+      frame.src = baseUrl + "&_t=" + Date.now();
+    }, 30000);
   </script>
 </body>
 </html>
