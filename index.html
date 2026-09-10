@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>TV Attendance Dashboard</title>
-  <!-- Prevents browser-level caching -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -33,12 +32,12 @@
       position: absolute;
       top: 0;
       left: 0;
-      /* Extended canvas to fit all columns through AR */
-      width: 3800px;
-      height: 2000px;
+      /* Extended canvas to render all 44 columns through AR */
+      width: 6200px;
+      height: 2500px;
 
-      /* Automatically locks the 3800px table to fill 100% of your browser width */
-      transform: scale(calc(100vw / 3800));
+      /* Scales the 6200px table down to fit 100% of your screen width */
+      transform: scale(calc(100vw / 6200));
       transform-origin: top left;
     }
   </style>
@@ -52,7 +51,7 @@
     const baseUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRiYd1k_b0xS3zBIPPeoVRdiVoi4gxS3IwWsua3M39ofI_ocmOlIUtFbNVf4aNNe9EQxv3U5571Y4Uc/pubhtml?gid=713619322&single=true&chrome=false";
     const frame = document.getElementById("sheetFrame");
 
-    // Force real-time reload every 30 seconds by busting the CDN cache
+    // Force real-time reload every 30 seconds
     setInterval(() => {
       frame.src = baseUrl + "&_t=" + Date.now();
     }, 30000);
